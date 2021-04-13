@@ -1,8 +1,7 @@
 package com.example;
 
-import com.example.beans.AppConfig;
-import com.example.beans.ServiceBean;
-import org.springframework.context.ApplicationContext;
+import com.example.componentScan.AppConfig;
+import com.example.componentScan.ServiceBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class App {

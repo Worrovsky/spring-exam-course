@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.beans.ConfigComponentScan;
+import com.example.componentScan.ConfigComponentScan;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;

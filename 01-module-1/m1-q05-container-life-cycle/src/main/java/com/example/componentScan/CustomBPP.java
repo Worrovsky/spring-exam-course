@@ -1,4 +1,4 @@
-package com.example.beans;
+package com.example.componentScan;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

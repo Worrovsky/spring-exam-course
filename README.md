@@ -393,9 +393,6 @@ BeanFactoryPostProcessor vs BeanPostProcessor:
 
 Пример - **@RestController** = **@Controller** + **@ResponseBody**
 
-
-
-
 #### 1.10.6 Область видимости бинов (scope)
 
 * Singleton - один бин на контейнер. По умолчанию
@@ -404,3 +401,39 @@ BeanFactoryPostProcessor vs BeanPostProcessor:
 * Session - новый экземпляр на сессию
 * Application - один экземпляр на ServletContext
 * WebSocket - один экземпляр на каждый сокет
+
+Задается через аннотацию **@Scope**, которая ставиться рядом с **@Component** над классом или рядом с **@Bean** над методом.
+
+**!! не путать:** нет смысла ставить над классом бина, если контекст создается через класс-конфигурацию (`@Configuration`). В этом случае ставить нужно над методом класса-конфигурации:
+
+    //@Scope("prototype") - не имеет смысла
+    public class Bean1 {...}
+
+    @Configuration
+    public class Config {
+        @Bean
+        @Scope("prototype") // здесь можно
+        public Bean1 bean1() {return new Bean1();}
+    }
+
+### 1.11 Ленивая/горячая (lazy/eagerly) загрузка бинов
+
+Зависит от области видимости:
+
+* Singleton по умолчанию загружаются всегда (eagerly)
+* Prototype - ленивая загрузка (по требованию)
+    - исключение: если prototype-бин входит в состав синлтона, тогда он также загружается всегда
+
+Изменение варианта загрузки:
+
+* через **@ComponentScan(lazyInit=true/false)**
+    - по умолчанию - false, Singleton - eagerly, Prototype - lazy
+    - true - все бины - lazy, даже сингтоны
+* через аннотацию **@Lazy(true/false)**
+    - по умолчанию включает lazy режим
+    - `@Lazy(false)` - eagerly
+    - где можно применять:
+        + на `@ Component`: этот бин будет загружаться, как указывает `@Lazy`
+        + на `@Configuration`: все бины этой конфигурации загружаются, как указывает `@Lazy`
+        + на метод с `@Bean`: этот бин загружается, как указывает `@Lazy`
+         

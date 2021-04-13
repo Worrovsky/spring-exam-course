@@ -16,6 +16,7 @@
         <module>m1-q06-application-context</module>
         <module>m1-q07-bean-lifecycle</module>
         <module>m1-q09-closing-context</module>
+        <module>m1-q11-lazy-eaglerly-loading</module>
     </modules>
 
     <properties>
