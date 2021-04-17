@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomBFPP implements BeanFactoryPostProcessor {
+    public CustomBFPP() {
+        System.out.println(getClass().getName() + ": constructor done!");
+    }
+
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory factory) throws BeansException {
         System.out.println(getClass().getName() + ": post process done.\n");

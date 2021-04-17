@@ -17,6 +17,7 @@
         <module>m1-q07-bean-lifecycle</module>
         <module>m1-q09-closing-context</module>
         <module>m1-q11-lazy-eaglerly-loading</module>
+        <module>m1-q15-autowired</module>
     </modules>
 
     <properties>
