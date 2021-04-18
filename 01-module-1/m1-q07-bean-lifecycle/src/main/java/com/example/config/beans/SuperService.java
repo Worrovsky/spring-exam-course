@@ -17,7 +17,7 @@ public class SuperService implements InitializingBean, DisposableBean {
     @Autowired
     public void setUtilService(UtilService utilService) {
         this.utilService = utilService;
-        System.out.println(getClass().getName() + ": set util service bean done.");
+        System.out.println(getClass().getName() + ": set util service configuration.method.bean done.");
     }
 
     public SuperService() {

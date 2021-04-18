@@ -55,11 +55,11 @@ public class ServiceWithMethodInjection {
     public void check() {
 
         System.out.println("\n" + getClass().getName() + " check:");
-        System.out.println("  bean #1 (exists): " + beanNo1);
-        System.out.println("  bean #2 (not exists, method with required=false): " + beanNo2);
-        System.out.println("  bean #3 (not exists, optional): " + beanNo3);
-        System.out.println("  bean #4 (exists): " + beanNo4);
-        System.out.println("  bean #5 (not exists, param with required=false): " + beanNo5);
+        System.out.println("  configuration.method.bean #1 (exists): " + beanNo1);
+        System.out.println("  configuration.method.bean #2 (not exists, method with required=false): " + beanNo2);
+        System.out.println("  configuration.method.bean #3 (not exists, optional): " + beanNo3);
+        System.out.println("  configuration.method.bean #4 (exists): " + beanNo4);
+        System.out.println("  configuration.method.bean #5 (not exists, param with required=false): " + beanNo5);
 
     }
 

@@ -31,11 +31,11 @@ public class ServiceWithConstructorInjection {
         this.beanNo5 = beanNo5;
 
         System.out.println(getClass().getName() + ": constructor done");
-        System.out.println("  bean #1: " + beanNo1);
-        System.out.println("  bean #2: " + beanNo2);
-        System.out.println("  bean #3 (exist, required = false): " + beanNo3);
-        System.out.println("  bean #4 (not exist, @Nullable): " + beanNo4);
-        System.out.println("  bean #5 (not exist, Optional): " + beanNo5);
+        System.out.println("  configuration.method.bean #1: " + beanNo1);
+        System.out.println("  configuration.method.bean #2: " + beanNo2);
+        System.out.println("  configuration.method.bean #3 (exist, required = false): " + beanNo3);
+        System.out.println("  configuration.method.bean #4 (not exist, @Nullable): " + beanNo4);
+        System.out.println("  configuration.method.bean #5 (not exist, Optional): " + beanNo5);
         System.out.println("");
     }
 }

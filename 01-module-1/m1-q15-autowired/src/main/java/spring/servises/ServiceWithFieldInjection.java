@@ -33,11 +33,11 @@ public class ServiceWithFieldInjection {
 
     public ServiceWithFieldInjection() {
         System.out.println(getClass().getName() + ": constructor done:");
-        System.out.println(" bean #1: (autowired) " + beanNo1);
-        System.out.println(" bean #2: (no such bean, not required) " + beanNo2);
-        System.out.println(" bean #3: (no such bean, @Nullable) " + beanNo3);
-        System.out.println(" bean #4: (no such bean, Optional) " + beanNo4);
-        System.out.println(" bean #5: (exists, Optional) " + beanNo5);
+        System.out.println(" configuration.method.bean #1: (autowired) " + beanNo1);
+        System.out.println(" configuration.method.bean #2: (no such configuration.method.bean, not required) " + beanNo2);
+        System.out.println(" configuration.method.bean #3: (no such configuration.method.bean, @Nullable) " + beanNo3);
+        System.out.println(" configuration.method.bean #4: (no such configuration.method.bean, Optional) " + beanNo4);
+        System.out.println(" configuration.method.bean #5: (exists, Optional) " + beanNo5);
     }
 
 
@@ -45,10 +45,10 @@ public class ServiceWithFieldInjection {
     public void checkFields() {
         System.out.println("");
         System.out.println(getClass().getName() + " @PostConstruct:");
-        System.out.println("  bean #1: (autowired) " + beanNo1);
-        System.out.println("  bean #2: (no such bean, not required) " + beanNo2);
-        System.out.println("  bean #3: (no such bean, @Nullable) " + beanNo3);
-        System.out.println("  bean #4: (no such bean, Optional) " + beanNo4);
-        System.out.println("  bean #5: (no such bean, Optional) " + beanNo5);
+        System.out.println("  configuration.method.bean #1: (autowired) " + beanNo1);
+        System.out.println("  configuration.method.bean #2: (no such configuration.method.bean, not required) " + beanNo2);
+        System.out.println("  configuration.method.bean #3: (no such configuration.method.bean, @Nullable) " + beanNo3);
+        System.out.println("  configuration.method.bean #4: (no such configuration.method.bean, Optional) " + beanNo4);
+        System.out.println("  configuration.method.bean #5: (no such configuration.method.bean, Optional) " + beanNo5);
     }
 }

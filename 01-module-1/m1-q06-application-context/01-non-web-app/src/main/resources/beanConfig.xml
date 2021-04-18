@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="springBeanNo1" class="config.beans.SpringBeanNo1">
-    </bean>
+    <configuration.method.bean id="springBeanNo1" class="config.beans.SpringBeanNo1">
+    </configuration.method.bean>
 
 
 </beans>

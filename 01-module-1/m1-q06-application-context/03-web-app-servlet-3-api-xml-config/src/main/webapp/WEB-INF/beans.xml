@@ -10,12 +10,12 @@
 
     <mvc:annotation-driven/>
 
-    <bean id="springController"
+    <configuration.method.bean id="springController"
           class="com.example.SpringController">
         <property name="springBean1" ref="springBean1"/>
-    </bean>
+    </configuration.method.bean>
 
-    <bean id="springBean1"
+    <configuration.method.bean id="springBean1"
           class="com.example.SpringBean1">
-    </bean>
+    </configuration.method.bean>
 </beans>
