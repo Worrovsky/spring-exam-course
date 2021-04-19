@@ -20,6 +20,7 @@
         <module>m1-q15-autowired</module>
         <module>m1-q18-qualified</module>
         <module>m1-q24-profiles</module>
+        <module>m1-q29-value-annotation</module>
     </modules>
 
     <properties>
