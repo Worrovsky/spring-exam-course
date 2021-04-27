@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>m3-q02-data-source</module>
+        <module>m3-q04-jdbc-template-callbacks</module>
     </modules>
 
     <properties>

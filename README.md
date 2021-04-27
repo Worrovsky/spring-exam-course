@@ -127,3 +127,98 @@ Apache DBCP - библиотека для создания пула соедин
 
 Также можно задать скрипты, расположенные в `/resources`. Имена по умолчанию `schema.sql` и `data.sql`. Впрочем тоже через свойства можно переопределить.
 
+
+
+### 3.3 Паттерн Template и JDBC Template
+
+Паттерн Template - паттерн для инкапсуляции последовательности шагов алгоритма. Достигается за счет создания абстрактного класса с перечнем методов. Часть этих методов может быть иметь реализацию (общие для шаблона). Остальные реализуются в конкретных классах. 
+
+Проблема паттерна - связывание классов через наследование. Может помочь паттерн стратегия - для тех же целей, но работает через композицию, вместо наследования.
+
+**Spring JdbcTemplate** - шаблон для выполнения sql-запросов. Берет на себя всю работу по открытию соединения, запуску выражения, обработке исключений и т. п.
+
+[docs](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#jdbc-core)
+
+Это класс в `org.springframework.jdbc.core`
+
+
+### 3.4 Что такое Callback. Как они используются в JdbcTemplate
+
+#### 3.4.1 Про callback
+
+Это код или ссылка на другой код, который может передаваться как аргумент в метод. Этот код будет вызван методом во время выполнения.
+
+Способы задания коллбеков:
+
+* класс, реализующий интерфейс
+* анонимный класс
+* лямбда-выражение
+* reference-method
+
+#### 3.4.2 Коллбеки в JdbcTemplate
+
+Используются в разных вариантах метода **query(String sql, <тут один из типов>)** 
+
+**Интерфейс RowMapper**
+
+Сигнатура метода объекта JdbcTemplate:
+
+    public <T> List<T> query(String sql, RowMapper<T> mapper)
+
+Сигнатура метода интерфейса:
+
+    T mapRow(ResultSet rs, int rowNum)
+
+Обходит **ResultSet** и преобразует каждую строку в объект типа `T`. Сам объект **RowMapper** обычно stateless. Реализация только вызывает `ResultSet::getXXX()`, на основе полученных значений формируется объект. Релизация никогда не вызывает `ResultSet::next()`.
+
+    List<String> names = jdbcTemplate.query(
+            "select employee_id, first_name from employee",
+            (rs, rowNum) -> {
+                String name = rs.getString("first_name");
+                return name;
+            }
+    );
+
+
+**Интерфейс RowCallbackHandler**
+
+Сигнатура метода JdbcTemplate:
+
+    public void query(String sql, RowCallbackHandler rch)
+
+Сигнатура метода интерфейса:
+
+    void processRow(ResultSet rs)
+
+Как и **RowMapper** обходит каждую строку результата запроса. Но ничего не возвращает. Поэтому обычно имеет состояние (не stateless). Реализация может вызывать `ResultSet::getXXX()`, но не должна вызывать `ResultSet::next()`. `proccessRow()` обычно извлекает данные и сохраняет / накапливает их в полях класса-реализации.
+
+    public class TotalSalaryRowCallbackHandler implements RowCallbackHandler {
+        private int totalSalary;
+        @Override
+        public void processRow(ResultSet rs) throws SQLException {
+            int currentSalary = rs.getInt("salary");
+            totalSalary = totalSalary + currentSalary;
+        }
+    }
+
+
+**Интерфейс ResultSerExtractor**
+
+Сигнатура метода JdbcTemplate:
+
+    <T> T query(String sql, ResultSetExtractor<T> rse)
+
+Сигнатура метода интерфейса:
+
+    T extractData(ResultSet rs)
+
+Реализация интерфейса сама должна обойти результат запроса (метод `ResultSet::next()`), сформировать какое-то значение и вернуть его. Обычно stateless. Закрывать `ResultSet` не нужно.
+
+    int total = jdbcTemplate.query("select salary from employee",
+        rs -> {
+            int total1 = 0;
+            while (rs.next()) {
+                total1 = total1 + rs.getInt("salary");
+            }
+            return total1;
+        });
