@@ -14,6 +14,7 @@
     <modules>
         <module>m3-q02-data-source</module>
         <module>m3-q04-jdbc-template-callbacks</module>
+        <module>m3-q05-query-example</module>
     </modules>
 
     <properties>
