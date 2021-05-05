@@ -20,7 +20,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "model.Student{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

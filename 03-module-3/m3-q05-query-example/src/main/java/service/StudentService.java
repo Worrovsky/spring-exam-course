@@ -32,7 +32,7 @@ public class StudentService {
         List<String> names = dao.getAllNames();
         System.out.println("\nGet all names: " + names);
 
-        System.out.println("\nStudent with id = " + id + ": " + dao.getStudentById(id));
+        System.out.println("\nmodel.Student with id = " + id + ": " + dao.getStudentById(id));
 
         System.out.println("\nAll students: " + dao.getAllStudents());
 
