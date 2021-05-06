@@ -17,6 +17,7 @@
         <module>m3-q05-query-example</module>
         <module>m3-q08-transaction</module>
         <module>m3-q21-jpa-example</module>
+        <module>m3-q24-jpa-with-spring-boot</module>
     </modules>
 
     <properties>
