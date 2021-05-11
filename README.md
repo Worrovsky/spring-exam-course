@@ -4,4 +4,4 @@
 
 [Модуль #3. Работа с БД](/03-module-3/README.md)
 
-[WIP Модуль #4. Работа с БД](/04-module-4/README.md)
+[WIP Модуль #4. Spring Boot](/04-module-4/README.md)

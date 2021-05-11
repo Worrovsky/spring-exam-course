@@ -515,3 +515,66 @@ JMX - специальный протокол для управления объ
     - создать бин, реализующий интерфейс
     - в методе интерфейса добавить свойства `builder.withDetail("props", "value");`
 
+
+
+### 4.28 Logger endpoint
+
+Позволяет просматривать логгеры и их уровни через:
+
+* HTTP `/actuator/loggers`
+* JMX `org.springframework.boot/Endpoint/Loggers/Operations/loggers`
+
+В JMX разрешена по умолчанию, через HTTP нужно явно разрешать
+
+    management.endpoints.web.exposure.include = loggers
+
+Можно проверить отдельный логгер через `/actuator/loggers/{LOGGER_NAME}`, например `/actuator/loggers/com.example.app`. Возвращает такое:
+
+    {
+        "configuredLevel": null,
+        "effectiveLevel": "INFO"
+    }
+
+Изменить уровень логгера можно через POST на `/actuator/loggers/{LOGGER_NAME}`. В теле передать желаемый уровень логгера:
+
+    {
+        "configuredLevel": "TRACE"
+    }    
+
+### 4.29 Доступ к endpoint'ам с помощью tag
+
+Можно использовать теги добавляя к запросу таким образом: `tag=KEY:VALUE`:
+
+    /actuator/metrics/http.server.requests?tag=status:200
+    /actuator/metrics/jvm.memory.max?tag=area:heap
+
+Можно несколько тегов в одном запросе через **&**: `tag=KEY1:VALUE1&tag=KEY2:VALUE2`:
+
+    /actuator/metrics/http.server.requests?tag=status:200&tag=method:GET
+
+Часто используется для endpoint'а метриках. Также `/actuator/metrics/{имя метрики}` показывает допустимые теги и их значения
+
+### 4.30 Для чего нужны метрики
+
+Endpoint `metrics` отображает различные метрики, собираемые при работе приложения
+
+`/actuator/metrics` отображает доступные метрики
+
+`/actuator/metrics/{ИМЯ_МЕТРИКИ}` показывает данные метрики, в том числе теги и их значения для более подробной информации:
+
+    /actuator/metrics/process.cpu.usage
+    /actuator/metrics/jvm.memory.used?tag=area:heap
+
+Примеры метрик:
+
+* использование процессора, использование ядер
+* используемая и доступная память
+* информация о потоках
+* статистика GC
+* информация по HTTP запросам
+* метрики встроенного сервера (Tomcat и т. п.)
+* и другие, в т. ч. можно собственные определять
+
+Метрики по умолчанию отключены, нужно включать
+
+    management.endpoints.web.exposure.include=metrics
