@@ -10,10 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>06-module-6-security</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>m6-q03-filter-chain</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
+        <spring.boot.version>2.4.5</spring.boot.version>
     </properties>
 
 </project>
